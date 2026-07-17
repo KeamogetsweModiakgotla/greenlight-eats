@@ -29,7 +29,7 @@ const REMOVABLE = ["French", "Cheese"];
 
 /* Phone numbers (no spaces, SA format). Orders number is used
    for the WhatsApp button. */
-const ORDERS_NUMBER   = "27766450999";  // 074 761 5967
+const ORDERS_NUMBER   = "27822356787";  // 074 761 5967
 const DELIVERY_NUMBER = "27737500541";  // 073 750 0541
 
 /* Card machine minimum (Rands) */
