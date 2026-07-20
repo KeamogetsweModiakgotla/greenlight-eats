@@ -20,8 +20,8 @@ const EXTRAS = [
   { id: "burger-x", name: "Burger patty",  price: 10, topping: true,  side: false },
   { id: "xchips",   name: "Extra chips",   price: 10, topping: true,  side: false },
   { id: "hruss",    name: "Half russian",  price: 18, topping: true,  side: true  },
-  { id: "fruss",    name: "Full russian",  price: 30, topping: true,  side: true  },
-  { id: "lchips",   name: "Large chips",   price: 35, topping: false, side: true  },
+  { id: "fruss",    name: "Full russian",  price: 30, topping: false,  side: true  },
+  { id: "Mchips",   name: "Medium chips",   price: 35, topping: false, side: true  },
 ];
 
 /* Ingredients a customer may leave OUT (free).          */
@@ -30,7 +30,7 @@ const REMOVABLE = ["French", "Cheese"];
 /* Phone numbers (no spaces, SA format). Orders number is used
    for the WhatsApp button. */
 const ORDERS_NUMBER   = "27766450999";  // 074 761 5967
-const DELIVERY_NUMBER = "27737500541";  // 073 750 0541
+const DELIVERY_NUMBER = "27822356787";  // 073 750 0541
 
 /* Card machine minimum (Rands) */
 const CARD_MINIMUM = 50;

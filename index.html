@@ -47,11 +47,11 @@
     <div class="info-grid">
       <div class="info-box">
         <div class="role">Orders</div>
-        <a id="orders-link" href="#">076 645 0999</a>
+        <a id="orders-link" href="#"></a>
       </div>
       <div class="info-box">
         <div class="role">Delivery</div>
-        <a id="delivery-link" href="#">073 750 0541</a>
+        <a id="delivery-link" href="#"></a>
       </div>
     </div>
     <p class="pay-note">💳 Card accepted for orders of <strong>R<span id="note-min">50</span> or more</strong> — smaller orders are cash.</p>
@@ -72,6 +72,15 @@
     <div id="slip-lines"></div>
     <div class="slip-total"><span>Total</span><span id="slip-total">R0</span></div>
     <p class="slip-paynote" id="slip-paynote"></p>
+    <div class="fulfil-row" role="group" aria-label="Collection or delivery">
+      <button type="button" class="fulfil-card" data-fulfil="collection" aria-pressed="true">
+        <span class="dot"></span> Collection
+      </button>
+      <button type="button" class="fulfil-card" data-fulfil="delivery" aria-pressed="false">
+        <span class="dot"></span> Delivery
+      </button>
+    </div>
+    <input type="text" class="address-input" id="address-input" placeholder="Delivery address (street &amp; area)" autocomplete="street-address">
     <div class="slip-actions">
       <a class="wa-btn" id="wa-btn" href="#" target="_blank" rel="noopener">Send order on WhatsApp</a>
       <button class="keep-btn" id="keep-btn">Keep browsing</button>

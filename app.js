@@ -118,7 +118,7 @@ KOTAS.forEach(k => {
   card.querySelectorAll(".top-row").forEach(row => {
     const id = row.dataset.extra;
     row.addEventListener("click", () => {
-      /* one of each topping only , tap toggles it on or off */
+      /* one of each topping only — tap toggles it on or off */
       if (toppings.has(id)) toppings.delete(id);
       else toppings.add(id);
       row.setAttribute("aria-pressed", toppings.has(id));
@@ -268,9 +268,28 @@ function renderCart() {
     const d = detailText(i, "; ");
     return `${i.qty}x ${i.label}${d ? ` (${d})` : ""} — ${R(i.qty * i.price)}`;
   });
-  const msg = `Hi Greenlight Eats! I'd like to order:\n\n${msgLines.join("\n")}\n\nTotal: ${R(t.r)}`;
-  document.getElementById("wa-btn").href = `https://wa.me/${ORDERS_NUMBER}?text=${encodeURIComponent(msg)}`;
+  const forDelivery = fulfil === "delivery";
+  const address = document.getElementById("address-input").value.trim();
+  const header = forDelivery
+    ? "Hi Greenlight Eats! I'd like to order for DELIVERY:"
+    : "Hi Greenlight Eats! I'd like to order for COLLECTION:";
+  let msg = `${header}\n\n${msgLines.join("\n")}\n\nTotal: ${R(t.r)}`;
+  if (forDelivery) msg += `\n\nDeliver to: ${address || "(I'll send my address now)"}`;
+  const number = forDelivery ? DELIVERY_NUMBER : ORDERS_NUMBER;
+  document.getElementById("wa-btn").href = `https://wa.me/${number}?text=${encodeURIComponent(msg)}`;
 }
+
+/* ---- Collection / delivery choice ---- */
+let fulfil = "collection";
+const fulfilCards = document.querySelectorAll(".fulfil-card");
+const addressInput = document.getElementById("address-input");
+fulfilCards.forEach(b => b.addEventListener("click", () => {
+  fulfil = b.dataset.fulfil;
+  fulfilCards.forEach(x => x.setAttribute("aria-pressed", x === b));
+  addressInput.classList.toggle("on", fulfil === "delivery");
+  renderCart(); /* re-point the WhatsApp link */
+}));
+addressInput.addEventListener("input", renderCart);
 
 /* ---- Overlay ---- */
 const overlay = document.getElementById("overlay");
@@ -279,8 +298,17 @@ document.getElementById("keep-btn").addEventListener("click", () => overlay.clas
 overlay.addEventListener("click", e => { if (e.target === overlay) overlay.classList.remove("open"); });
 
 /* ---- Contact links & card minimum ---- */
-document.getElementById("orders-link").href = "tel:+" + ORDERS_NUMBER;
-document.getElementById("delivery-link").href = "tel:+" + DELIVERY_NUMBER;
+/* Display like "074 761 5967" from the config value "27747615967" */
+function prettyNumber(intl) {
+  const local = "0" + intl.slice(2); // 27… -> 0…
+  return local.slice(0,3) + " " + local.slice(3,6) + " " + local.slice(6);
+}
+const ordersLink = document.getElementById("orders-link");
+const deliveryLink = document.getElementById("delivery-link");
+ordersLink.href = "tel:+" + ORDERS_NUMBER;
+ordersLink.textContent = prettyNumber(ORDERS_NUMBER);
+deliveryLink.href = "tel:+" + DELIVERY_NUMBER;
+deliveryLink.textContent = prettyNumber(DELIVERY_NUMBER);
 document.getElementById("chip-min").textContent = CARD_MINIMUM;
 document.getElementById("note-min").textContent = CARD_MINIMUM;
 
